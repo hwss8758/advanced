@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 @Component
-class HelloTraceV1 {
+class HelloTraceV2 {
 
     companion object {
         private const val START_PREFIX = "-->"
@@ -22,6 +22,13 @@ class HelloTraceV1 {
             sb.append(if (i == level - 1) "|$prefix" else "|   ")
         }
         return sb.toString()
+    }
+
+    fun beginSync(beforeTraceId: TraceId, message: String): TraceStatus {
+        val traceId = beforeTraceId.createNextId()
+        val startTimeMs = System.currentTimeMillis()
+        log.info("[{}] {}{}", traceId.id, addSpace(START_PREFIX, traceId.level), message);
+        return TraceStatus(traceId, startTimeMs, message)
     }
 
     fun begin(message: String): TraceStatus {
