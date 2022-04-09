@@ -21,6 +21,11 @@ class FieldLogTrace : LogTrace {
         else traceIdHolder!!.createNextId()
     }
 
+    private fun releaseTraceId() {
+        if (traceIdHolder?.isFirstLevel() == true) traceIdHolder = null
+        else traceIdHolder?.createPreviousId()
+    }
+
     private fun addSpace(prefix: String, level: Int): String {
         val sb = StringBuilder()
         for (i in 0..level) {
@@ -52,6 +57,8 @@ class FieldLogTrace : LogTrace {
                 e.toString()
             )
         }
+
+        releaseTraceId()
     }
 
     override fun begin(message: String): TraceStatus {
