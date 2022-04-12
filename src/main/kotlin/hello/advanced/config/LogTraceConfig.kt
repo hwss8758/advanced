@@ -1,7 +1,7 @@
 package hello.advanced.config
 
-import hello.advanced.trace.loatrace.FieldLogTrace
 import hello.advanced.trace.loatrace.LogTrace
+import hello.advanced.trace.loatrace.ThreadLocalLogTrace
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -9,5 +9,5 @@ import org.springframework.context.annotation.Configuration
 class LogTraceConfig {
 
     @Bean
-    fun logTrace(): LogTrace = FieldLogTrace()
+    fun logTrace(): LogTrace = ThreadLocalLogTrace()
 }
