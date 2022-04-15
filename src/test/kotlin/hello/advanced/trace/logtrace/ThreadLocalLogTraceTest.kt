@@ -1,4 +1,4 @@
-package hello.advanced.trace.loatrace
+package hello.advanced.trace.logtrace
 
 import org.junit.jupiter.api.Test
 

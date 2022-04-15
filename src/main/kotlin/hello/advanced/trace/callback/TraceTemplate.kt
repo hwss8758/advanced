@@ -1,17 +1,18 @@
-package hello.advanced.trace.template
+package hello.advanced.trace.callback
 
 import hello.advanced.trace.TraceStatus
 import hello.advanced.trace.logtrace.LogTrace
+import org.springframework.stereotype.Component
 
-abstract class AbstractTemplate<T>(private val trace: LogTrace) {
+@Component
+class TraceTemplate(private val trace: LogTrace) {
 
-    fun execute(message: String): T {
-
+    fun <T> execute(message: String, callback: TraceCallback<T>): T {
         var status: TraceStatus? = null
 
         try {
             status = trace.begin(message)
-            val result: T = call()
+            val result = callback.call()
             trace.end(status)
             return result
         } catch (e: java.lang.Exception) {
@@ -19,7 +20,4 @@ abstract class AbstractTemplate<T>(private val trace: LogTrace) {
             throw e
         }
     }
-
-    protected abstract fun call(): T
 }
-

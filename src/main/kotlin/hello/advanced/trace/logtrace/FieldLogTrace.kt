@@ -1,10 +1,10 @@
-package hello.advanced.trace.loatrace
+package hello.advanced.trace.logtrace
 
 import hello.advanced.trace.TraceId
 import hello.advanced.trace.TraceStatus
 import org.slf4j.LoggerFactory
 
-class ThreadLocalLogTrace : LogTrace {
+class FieldLogTrace : LogTrace {
 
     companion object {
         private const val START_PREFIX = "-->"
@@ -14,17 +14,16 @@ class ThreadLocalLogTrace : LogTrace {
 
     private val log = LoggerFactory.getLogger(this::class.java)
 
-    private var traceIdHolder: ThreadLocal<TraceId?> = ThreadLocal()
+    private var traceIdHolder: TraceId? = null
 
     private fun syncTraceId() {
-        val traceId = traceIdHolder.get()
-        if (traceId == null) traceIdHolder.set(TraceId())
-        else traceIdHolder.set(traceId.createNextId())
+        traceIdHolder = if (traceIdHolder == null) TraceId()
+        else traceIdHolder!!.createNextId()
     }
 
     private fun releaseTraceId() {
-        if (traceIdHolder.get()?.isFirstLevel() == true) traceIdHolder.remove()
-        else traceIdHolder.get()?.createPreviousId()
+        if (traceIdHolder?.isFirstLevel() == true) traceIdHolder = null
+        else traceIdHolder?.createPreviousId()
     }
 
     private fun addSpace(prefix: String, level: Int): String {
@@ -64,7 +63,7 @@ class ThreadLocalLogTrace : LogTrace {
 
     override fun begin(message: String): TraceStatus {
         syncTraceId()
-        val traceId = traceIdHolder.get()!!
+        val traceId = traceIdHolder!!
         val startTimeMs = System.currentTimeMillis()
         log.info("[{}] {}{}", traceId.id, addSpace(START_PREFIX, traceId.level), message);
         return TraceStatus(traceId, startTimeMs, message)
