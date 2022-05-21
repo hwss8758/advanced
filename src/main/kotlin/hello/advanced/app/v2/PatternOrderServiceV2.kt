@@ -6,8 +6,8 @@ import hello.advanced.trace.hellotrace.HelloTraceV2
 import org.springframework.stereotype.Service
 
 @Service
-class OrderServiceV2(
-    private val repository: OrderRepositoryV2,
+class PatternOrderServiceV2(
+    private val repository: PatternOrderRepositoryV2,
     private val trace: HelloTraceV2
 ) {
 

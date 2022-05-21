@@ -1,10 +1,9 @@
-package hello.advanced.app.v0
+package hello.advanced.proxy.app.v3
 
 import org.springframework.stereotype.Repository
 
 @Repository
-class OrderRepositoryV0 {
-
+class OrderRepositoryV3 {
     fun save(itemId: String) {
         if (itemId == "ex") throw IllegalStateException("예외 발생!!")
         Thread.sleep(1000L)

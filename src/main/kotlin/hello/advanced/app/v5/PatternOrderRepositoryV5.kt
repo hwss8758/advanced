@@ -5,7 +5,7 @@ import hello.advanced.trace.callback.TraceTemplate
 import org.springframework.stereotype.Repository
 
 @Repository
-class OrderRepositoryV5(private val template: TraceTemplate) {
+class PatternOrderRepositoryV5(private val template: TraceTemplate) {
 
     fun save(itemId: String) {
         template.execute("OrderRepository.save", object : TraceCallback<Unit> {

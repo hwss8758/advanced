@@ -5,8 +5,8 @@ import hello.advanced.trace.template.AbstractTemplate
 import org.springframework.stereotype.Service
 
 @Service
-class OrderServiceV4(
-    private val repository: OrderRepositoryV4,
+class PatternOrderServiceV4(
+    private val repository: PatternOrderRepositoryV4,
     private val trace: LogTrace
 ) {
 

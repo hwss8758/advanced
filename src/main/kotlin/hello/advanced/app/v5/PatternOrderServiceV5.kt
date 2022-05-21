@@ -5,8 +5,8 @@ import hello.advanced.trace.callback.TraceTemplate
 import org.springframework.stereotype.Service
 
 @Service
-class OrderServiceV5(
-    private val repository: OrderRepositoryV5,
+class PatternOrderServiceV5(
+    private val repository: PatternOrderRepositoryV5,
     private val template: TraceTemplate
 ) {
     fun orderItem(itemId: String) {

@@ -1,23 +1,23 @@
-package hello.advanced.app.v1
+package hello.advanced.app.v3
 
 import hello.advanced.trace.TraceStatus
-import hello.advanced.trace.hellotrace.HelloTraceV1
+import hello.advanced.trace.logtrace.LogTrace
 import org.springframework.stereotype.Service
 
 @Service
-class OrderServiceV1(
-    private val repository: OrderRepositoryV1,
-    private val trace: HelloTraceV1
+class PatternOrderServiceV3(
+    private val repository: PatternOrderRepositoryV3,
+    private val trace: LogTrace
 ) {
 
     fun orderItem(itemId: String) {
         var status: TraceStatus? = null
         try {
-            status = trace.begin("OrderServiceV1.orderItem")
+            status = trace.begin("OrderServiceV3.orderItem")
             repository.save(itemId)
             trace.end(status)
         } catch (e: Exception) {
-            trace.exception(status, e)
+            trace.exception(status!!, e)
             throw e
         }
     }

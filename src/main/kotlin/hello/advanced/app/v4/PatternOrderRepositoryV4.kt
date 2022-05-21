@@ -5,7 +5,7 @@ import hello.advanced.trace.template.AbstractTemplate
 import org.springframework.stereotype.Repository
 
 @Repository
-class OrderRepositoryV4(private val trace: LogTrace) {
+class PatternOrderRepositoryV4(private val trace: LogTrace) {
 
     fun save(itemId: String) {
 

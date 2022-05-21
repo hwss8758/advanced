@@ -3,11 +3,13 @@ package hello.advanced.app.v2
 import hello.advanced.trace.TraceStatus
 import hello.advanced.trace.hellotrace.HelloTraceV2
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class OrderControllerV2(
-    private val service: OrderServiceV2,
+@RequestMapping("/pattern")
+class PatternOrderControllerV2(
+    private val service: PatternOrderServiceV2,
     private val trace: HelloTraceV2
 ) {
 
