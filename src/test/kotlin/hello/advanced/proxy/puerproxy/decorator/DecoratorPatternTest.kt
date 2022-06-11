@@ -26,9 +26,9 @@ class DecoratorPatternTest {
     @Test
     fun decorator2() {
         val realComponent = RealComponent()
-        val timeDecorator = TimeDecorator(realComponent)
-        val messageDecorator = MessageDecorator(timeDecorator)
-        val client = DecoratorPatternClient(messageDecorator)
+        val messageDecorator = MessageDecorator(realComponent)
+        val timeDecorator = TimeDecorator(messageDecorator)
+        val client = DecoratorPatternClient(timeDecorator)
         client.execute()
     }
 }
