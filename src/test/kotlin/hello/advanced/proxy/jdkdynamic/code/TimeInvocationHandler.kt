@@ -15,7 +15,7 @@ class TimeInvocationHandler(private val target: Any) : InvocationHandler {
 
         val stopWatch = StopWatch()
         stopWatch.start()
-        val result = method?.invoke(target)
+        val result = method?.invoke(target, *(args ?: emptyArray()))
         stopWatch.stop()
 
         log.info("TimeProxy 종료: " + stopWatch.shortSummary())
