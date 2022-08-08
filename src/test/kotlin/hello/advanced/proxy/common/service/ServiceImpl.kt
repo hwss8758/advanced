@@ -2,7 +2,7 @@ package hello.advanced.proxy.common.service
 
 import org.slf4j.LoggerFactory
 
-class ServiceImpl : ServiceInterface {
+open class ServiceImpl : ServiceInterface {
 
     private val log = LoggerFactory.getLogger(this::class.java)
 
